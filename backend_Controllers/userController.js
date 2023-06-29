@@ -19,6 +19,7 @@ const createUser = async (req, res) => {
   }
 };
 
+// get user by query active query parameter `/users?active=true` or `/users?active=false`  or all users
 const getUsers = async (req, res) => {
   try {
     const { active } = req.query;
@@ -48,4 +49,21 @@ const getUsers = async (req, res) => {
   }
 };
 
-module.exports = { createUser, getUsers };
+// accepts a GET request on path ‘/users/:id` to retrieve the user with the matching url parameter from the db
+
+const getUSerByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    // console.log(id);
+    await user
+      .findById(id)
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      });
+  } catch (error) {}
+};
+
+module.exports = { createUser, getUsers, getUSerByID };
