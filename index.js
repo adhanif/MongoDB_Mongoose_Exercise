@@ -1,28 +1,31 @@
 require("dotenv").config();
 const express = require("express");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+const userRouter = require("./backend_Routes/userRoutes");
 const port = 3000;
+
 const app = express();
 const URL = process.env.URL;
 
 app.use(express.json());
-//Initial connecting
+
 mongoose
   .connect(URL)
-  .then(() => console.log("connected to db"))
+  .then(() => console.log("Connected to the database"))
   .catch((err) => {
-    console.log("error connecting to db", err);
+    console.log("Error connecting to the database:", err);
   });
 
-//After Initial connecting
-
 mongoose.connection.on("error", (err) => {
-  console.log("lost connection", err);
+  console.log("Lost connection to the database", err);
 });
 
-// app.get("/", (req, res) => {
-//   res.send("Hello World!");
-// });
-// app.listen(port, () => {
-//   console.log(`Example app listening on port http://localhost:${port}`);
-// });
+app.use("/users", userRouter);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port http://localhost:${port}`);
+});
