@@ -5,6 +5,7 @@ const port = 3000;
 const app = express();
 const URL = process.env.URL;
 
+app.use(express.json());
 //Initial connecting
 mongoose
   .connect(URL)
