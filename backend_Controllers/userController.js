@@ -63,7 +63,10 @@ const getUSerByID = async (req, res) => {
       .catch((err) => {
         res.status(400).send(err);
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error retrieving users");
+  }
 };
 
 //PUT request on path ‘/users/:id` to update the user with the matching url parameter from the db
@@ -84,7 +87,10 @@ const updateUSerByID = async (req, res) => {
       .catch((err) => {
         res.status(400).send(err);
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error retrieving users");
+  }
 };
 
 //DELETE request on path ‘/users/:id` to update the user with the matching url parameter from the db
@@ -100,7 +106,10 @@ const deleteUSerByID = async (req, res) => {
       .catch((err) => {
         res.status(400).send(err);
       });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error retrieving users");
+  }
 };
 
 module.exports = {

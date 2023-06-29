@@ -2,11 +2,11 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./backend_Routes/userRoutes");
+const eventRouter = require("./backend_Routes/eventRoutes");
 const port = 3000;
-
-const app = express();
 const URL = process.env.URL;
 
+const app = express();
 app.use(express.json());
 
 mongoose
@@ -21,6 +21,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 app.use("/users", userRouter);
+app.use("/events", eventRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
