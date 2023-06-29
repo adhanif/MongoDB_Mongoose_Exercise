@@ -66,4 +66,26 @@ const getUSerByID = async (req, res) => {
   } catch (error) {}
 };
 
-module.exports = { createUser, getUsers, getUSerByID };
+//PUT request on path ‘/users/:id` to update the user with the matching url parameter from the db
+
+const updateUSerByID = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { email, name, age, phoneNumber, isActive } = req.body;
+    // console.log(email, name, age, phoneNumber, isActive);
+    await user
+      .findByIdAndUpdate(
+        id,
+        { email, name, age, phoneNumber, isActive },
+        { new: true }
+      )
+      .then((result) => {
+        res.send(result);
+      })
+      .catch((err) => {
+        res.status(400).send(err);
+      });
+  } catch (error) {}
+};
+
+module.exports = { createUser, getUsers, getUSerByID, updateUSerByID };
