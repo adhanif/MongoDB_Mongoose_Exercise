@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const user = require("./user");
 const eventSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,8 +14,8 @@ const eventSchema = new mongoose.Schema({
     required: true,
   },
   organizer: {
-    type: mongoose.Types.ObjectId,
-    ref: "user",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Users",
   },
 });
 
