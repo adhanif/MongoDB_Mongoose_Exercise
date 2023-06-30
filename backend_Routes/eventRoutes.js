@@ -1,8 +1,12 @@
 const express = require("express");
 const eventRouter = express.Router();
-const { createEvent } = require("../backend_Controllers/eventController");
+const {
+  createEvent,
+  getAllEvents,
+  getEventByID,
+} = require("../backend_Controllers/eventController");
 
-app.post("/", createEvent);
-eventRouter;
-
+eventRouter.post("/", createEvent);
+eventRouter.get("/", getAllEvents);
+eventRouter.get("/:id", getEventByID);
 module.exports = eventRouter;
