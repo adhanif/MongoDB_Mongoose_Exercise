@@ -41,4 +41,19 @@ const getEventByID = async (req, res) => {
   }
 };
 
-module.exports = { createEvent, getAllEvents, getEventByID };
+const joinEvent = async (req, res) => {
+  try {
+    const { userID } = req.body;
+
+    const { id } = req.params;
+    const data = await event.findById(id);
+    data.attendees = [...data.attendees, userID];
+    data.save();
+    res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error retrieving users");
+  }
+};
+
+module.exports = { createEvent, getAllEvents, getEventByID, joinEvent };
